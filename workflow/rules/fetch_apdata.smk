@@ -1,3 +1,5 @@
+import os
+
 # Import the apd tools, vcersions customized for Snakemake
 from apd.snakemake import get_analysis_data, remote
 
@@ -13,9 +15,15 @@ rule fetch_apdata:
             polarity=w.polarity,
         ),
     output:
-        "data/input/{eventtype}_{datatype}_{polarity}.root",
+        os.path.join(
+            config.get("output_filepath_prefix", "data"),
+            "{eventtype}_{datatype}_{polarity}.root",
+        ),
     log:
-        "logs/fetch_apdata_{eventtype}_{datatype}_{polarity}.log",
+        os.path.join(
+            config.get("log_filepath_prefix", "logs"),
+            "fetch_apdata_{eventtype}_{datatype}_{polarity}.log",
+        ),
     threads: 8
     wrapper:
         "v3.9.0/phys/root/hadd"
@@ -24,7 +32,10 @@ rule fetch_apdata:
 rule gather_apdata:
     input:
         data=expand(
-            "data/input/{eventtype}_{datatype}_{polarity}.root",
+            os.path.join(
+                config.get("output_filepath_prefix", "data"),
+                "{eventtype}_{datatype}_{polarity}.root",
+            ),
             eventtype=config["eventtype"],
             datatype=config["datatype"],
             polarity=config["polarity"],
