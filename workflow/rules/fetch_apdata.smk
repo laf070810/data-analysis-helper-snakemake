@@ -25,6 +25,7 @@ rule fetch_apdata:
             "fetch_apdata_{eventtype}_{datatype}_{polarity}.log",
         ),
     threads: 8
+    retries: 3
     wrapper:
         "v3.9.0/phys/root/hadd"
 
