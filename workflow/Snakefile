@@ -1,6 +1,0 @@
-from snakemake.utils import min_version
-
-min_version("7")
-
-
-include: "rules/fetch_apdata.smk"

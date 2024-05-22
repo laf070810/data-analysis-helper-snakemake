@@ -1,0 +1,5 @@
+channels:
+  - conda-forge
+dependencies:
+  - root=6.30
+  - lhcbstyle=0.1
