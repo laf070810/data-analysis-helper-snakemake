@@ -1,0 +1,14 @@
+name: "tmva_classification_application"
+description: apply MVA
+authors:
+  - Anfeng Li
+input:
+  mva_weights_filepath: mva_weights_filepath
+  input_filepath: input_filepath
+output:
+  output_filepath: output_filepath
+params:
+  input_tree_name: name of the input TTree
+  output_tree_name: name of the output TTree
+  mva_variable_num: mva_variable_num
+  mva_response_name: mva_response_name

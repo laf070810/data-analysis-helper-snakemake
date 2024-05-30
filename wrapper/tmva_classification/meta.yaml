@@ -1,0 +1,19 @@
+name: "tmva_classification"
+description: perform MVA training using TMVA
+url:
+authors:
+  - Anfeng Li
+input:
+  signal_filepaths: signal_filepaths
+  background_filepaths: background_filepaths
+output:
+  BDTG_weights_filepath: BDTG_weights_filepath
+  BDTG_class_filepath: BDTG_class_filepath
+  output_filepath: output_filepath
+params:
+  signal_tree_name: name of the signal TTree
+  background_tree_name: name of the background TTree
+  training_variables: training_variables
+  dataset_options: dataset_options
+  factory_options: factory_options
+  method_options: method_options
