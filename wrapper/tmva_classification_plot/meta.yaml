@@ -13,3 +13,6 @@ output:
   - "<any_path>/TMVAdataset/plots/mva_BDTG.png"
   - "<any_path>/TMVAdataset/plots/overtrain_BDTG.png"
   - "<any_path>/TMVAdataset/plots/mvaeffs_BDTG.png"
+params:
+  nsignal: number of signal for calculating FoM
+  nbackground: number of background for calculating FoM
