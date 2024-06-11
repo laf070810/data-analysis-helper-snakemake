@@ -5,9 +5,7 @@ authors:
 input:
   input_filepath: input_filepath
 output:
-  - "<any_path>/TMVAdataset/plots/variables_id_c1.png"
-  - "<any_path>/TMVAdataset/plots/variables_id_c2.png"
-  - "<any_path>/TMVAdataset/plots/variables_id_c3.png"
+  - expand("<any_path>/TMVAdataset/plots/variables_id_c{i}.png", i=range(1, len(training_variables) // 6 + 2))
   - "<any_path>/TMVAdataset/plots/CorrelationMatrixS.png"
   - "<any_path>/TMVAdataset/plots/CorrelationMatrixB.png"
   - "<any_path>/TMVAdataset/plots/mva_BDTG.png"
