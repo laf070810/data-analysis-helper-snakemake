@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+dependencies:
+  - ROOT=6.30.4
+  - pandas=2.2.2
+  - pip
+  - pip:
+      - pytee2==0.0.1

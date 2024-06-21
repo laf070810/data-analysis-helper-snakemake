@@ -1,0 +1,15 @@
+name: "fom_optimization"
+description: optimize Figure of Merit
+authors:
+  - Anfeng Li
+input:
+  signal_filepaths: signal_filepaths
+  background_filepaths: background_filepaths
+output:
+  fom_filepath: fom_filepath
+params:
+  signal_tree_name: name of the signal TTree
+  background_tree_name: name of the background TTree
+  nsignal: nsignal
+  nbackground: nbackground
+  cut_points: cut_points
