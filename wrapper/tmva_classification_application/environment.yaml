@@ -1,7 +1,7 @@
 channels:
   - conda-forge
 dependencies:
-  - ROOT=6.30.4
+  - ROOT=6.32
   - pip
   - pip:
       - pytee2==0.0.1

@@ -14,6 +14,8 @@ params:
   signal_tree_name: name of the signal TTree
   background_tree_name: name of the background TTree
   training_variables: training_variables
+  spectator_variables (optional): spectator_variables
   dataset_options: dataset_options
+  use_cv (optional, defaults to False): use cross validation
   factory_options: factory_options
   method_options: method_options

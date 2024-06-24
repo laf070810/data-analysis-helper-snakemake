@@ -23,6 +23,8 @@ for background_filepath in snakemake.input.background_filepaths:
 dataloader = ROOT.TMVA.DataLoader("TMVAdataset")
 for training_variable_name in snakemake.params.training_variables:
     dataloader.AddVariable(training_variable_name, "F")
+for spectator_variable_name in snakemake.params.get("spectator_variables", []):
+    dataloader.AddSpectator(spectator_variable_name)
 dataloader.AddSignalTree(signal_chain, 1.0)
 dataloader.AddBackgroundTree(background_chain, 1.0)
 dataloader.PrepareTrainingAndTestTree(
@@ -37,20 +39,31 @@ ROOT.TMVA.gConfig().GetIONames().fWeightFileDirPrefix = os.path.join(
     os.path.dirname(snakemake.output.BDTG_weights_filepath), "../.."
 )
 
-factory = ROOT.TMVA.Factory(
-    "TMVAClassification",
-    output_file,
-    snakemake.params.factory_options,
-)
-factory.BookMethod(
-    dataloader,
-    ROOT.TMVA.Types.kBDT,
-    "BDTG",
-    snakemake.params.method_options,
-)
-factory.TrainAllMethods()
-factory.TestAllMethods()
-factory.EvaluateAllMethods()
+if snakemake.params.get("use_cv", False):
+    cv = ROOT.TMVA.CrossValidation(
+        "TMVAClassification", dataloader, output_file, snakemake.params.factory_options
+    )
+    cv.BookMethod(
+        ROOT.TMVA.Types.kBDT,
+        "BDTG",
+        snakemake.params.method_options,
+    )
+    cv.Evaluate()
+else:
+    factory = ROOT.TMVA.Factory(
+        "TMVAClassification",
+        output_file,
+        snakemake.params.factory_options,
+    )
+    factory.BookMethod(
+        dataloader,
+        ROOT.TMVA.Types.kBDT,
+        "BDTG",
+        snakemake.params.method_options,
+    )
+    factory.TrainAllMethods()
+    factory.TestAllMethods()
+    factory.EvaluateAllMethods()
 
 output_file.Close()
 

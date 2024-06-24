@@ -17,7 +17,10 @@ root_codes = f"""
 using namespace TMVA::Experimental;
 ROOT::EnableImplicitMT({snakemake.threads});
 RReader model("{os.path.abspath(snakemake.input.mva_weights_filepath)}");
-auto variables = model.GetVariableNames();
+auto training_variables = model.GetVariableNames();
+auto spectator_variables = model.GetSpectatorNames();
+std::vector<std::string> variables(training_variables.size() + spectator_variables.size());
+std::merge(training_variables.begin(), training_variables.end(), spectator_variables.begin(), spectator_variables.end(), variables.begin());
 ROOT::RDataFrame rdf("{snakemake.params.input_tree_name}", "{os.path.abspath(snakemake.input.input_filepath)}");
 auto rdf2 = rdf.Define("{snakemake.params.mva_response_name}", Compute<{snakemake.params.mva_variable_num}, float>(model), variables);
 rdf2.Snapshot("{snakemake.params.output_tree_name}", "{os.path.abspath(snakemake.output.output_filepath)}");
