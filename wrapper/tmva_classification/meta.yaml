@@ -7,9 +7,11 @@ input:
   signal_filepaths: signal_filepaths
   background_filepaths: background_filepaths
 output:
-  BDTG_weights_filepath: BDTG_weights_filepath
-  BDTG_class_filepath: BDTG_class_filepath
+  BDTG_weights_filepath: "<any_path>/TMVAdataset/weights/TMVAClassification_BDTG.weights.xml"
+  BDTG_class_filepath: "<any_path>/TMVAdataset/weights/TMVAClassification_BDTG.class.C"
   output_filepath: output_filepath
+  BDTG_perfold_weights_filepath (optional, used for tracking all outputs): expand("<any_path>/TMVAdataset/weights/TMVAClassification_BDTG_fold{fold}.weights.xml", fold=range(1, config["MVA_numfold"] + 1))
+  BDTG_perfold_class_filepath (optional, used for tracking all outputs): expand("<any_path>/TMVAdataset/weights/TMVAClassification_BDTG_fold{fold}.class.C", fold=range(1, config["MVA_numfold"] + 1))
 params:
   signal_tree_name: name of the signal TTree
   background_tree_name: name of the background TTree
