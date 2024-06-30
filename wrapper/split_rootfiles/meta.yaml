@@ -1,0 +1,14 @@
+name: "split_rootfiles"
+description: split a root file into a chunk
+url:
+authors:
+  - Anfeng Li
+input:
+  - TTree ROOT file
+output:
+  - TTree ROOT file
+params:
+  input_tree_name: input_tree_name
+  output_tree_name: output_tree_name
+  ipartition: ipartition
+  npartitions: npartitions

@@ -1,0 +1,11 @@
+name: "root2parquet"
+description: convert ROOT TTree to parquet file
+url:
+authors:
+  - Anfeng Li
+input:
+  - TTree ROOT file
+output:
+  - parquet file
+params:
+  input_tree_name: input_tree_name
